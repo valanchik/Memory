@@ -18,8 +18,9 @@ namespace Ecs.Systems {
             {
                 var pool = world.GetPool<NewGameComponent>();
                 ref var weapon = ref pool.Get(entity);
-                var game = systems.GetShared<SharedData>().Game;
-                game.NewGame(12);
+                var shared = systems.GetShared<SharedData>();
+                shared.Game.NewGame(12);
+                shared.GridCards.AddOneCard();
                 pool.Del(entity);
             }
             

@@ -8,7 +8,8 @@ using UnityEngine;
 
 public class ECSStartup : MonoBehaviour
 {
-    IEcsSystems _systems;
+    [SerializeField] private GridCards gridCards;
+    public IEcsSystems _systems;
 #if UNITY_EDITOR
     IEcsSystems _editorSystems;
 #endif
@@ -16,6 +17,7 @@ public class ECSStartup : MonoBehaviour
     {
         var sharedData = new SharedData();
         sharedData.Game = new MemoryGame(5);
+        sharedData.GridCards = gridCards;
         _systems = new EcsSystems (new EcsWorld (), sharedData);
 #if UNITY_EDITOR
         // Создаем отдельную группу для отладочных систем.
