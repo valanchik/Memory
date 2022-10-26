@@ -28,6 +28,7 @@ public class ECSStartup : MonoBehaviour
 #endif
         _systems
             .Add (new NewGameSystem())
+            .Add (new RemoveComponentsSystem())
             .Init ();
     }
     

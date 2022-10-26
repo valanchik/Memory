@@ -10,7 +10,6 @@ namespace MonoBehaivours
         private EcsWorld world;
         void Start()
         {
-            var obj = FindObjectOfType<ECSStartup>();
             world = FindObjectOfType<ECSStartup>()._systems.GetWorld();
         }
         void IPointerClickHandler.OnPointerClick (PointerEventData eventData)
