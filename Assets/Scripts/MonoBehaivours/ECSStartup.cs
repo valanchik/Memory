@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Ecs;
 using Ecs.Systems;
+using ECS.Systems;
 using Game;
 using Leopotam.EcsLite;
 using UnityEngine;
@@ -28,6 +29,7 @@ public class ECSStartup : MonoBehaviour
 #endif
         _systems
             .Add (new NewGameSystem())
+            .Add (new RotateCardSystem()) 
             .Add (new RemoveComponentsSystem())
             .Init ();
     }
