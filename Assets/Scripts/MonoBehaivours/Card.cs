@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -10,17 +11,18 @@ public class Card : MonoBehaviour
    public GameObject Front;
    public GameObject Back;
    public bool IsOpen;
+   public bool CanRotate = true;
    private float duration = 0.1f;
    private RotateMode mode = RotateMode.FastBeyond360;
    private bool isRotation;
-   public void Toggle()
+   public void Toggle(Action  callback)
    {
       if(isRotation) return;
-      if(IsOpen) Hide(); 
-      else Show();
+      if(IsOpen) Hide(callback); 
+      else Show(callback);
    }
 
-   public void Show()
+   public void Show(Action  callback)
    {
       if (!IsOpen)
       {
@@ -32,11 +34,12 @@ public class Card : MonoBehaviour
             {
                IsOpen = true;
                isRotation = false;
+               callback();
             });
          });
       }
    }
-   public void Hide()
+   public void Hide(Action  callback)
    {
       if (IsOpen)
       {
@@ -48,6 +51,7 @@ public class Card : MonoBehaviour
             {
                IsOpen = false;
                isRotation = false;
+               callback();
             });;
            
          });
