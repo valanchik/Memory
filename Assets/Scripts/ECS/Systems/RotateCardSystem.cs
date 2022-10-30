@@ -10,10 +10,16 @@ namespace ECS.Systems {
         {
             if (systems.TryTakeOnComponentFromPool<ClickActionComponent>(out var comp) && comp.Type == EcsOnClickType.Card)
             {
-                comp.Target.GetComponent<Card>()?.Toggle(() =>
+                var card = comp.Target.GetComponent<Card>();
+                if (card!=null && card.CanRotate)
                 {
-                    Debug.Log("EndRotation");
-                });
+                    
+                    card.Toggle(() =>
+                    {
+                        ref var takeComponent = ref  systems.TakeComponent<RotatedCardComponent>();
+                        takeComponent.Card = card;
+                    });
+                }
             }
         }
     }

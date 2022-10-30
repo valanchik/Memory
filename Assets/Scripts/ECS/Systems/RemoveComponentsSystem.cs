@@ -16,6 +16,7 @@ namespace Ecs.Systems
         {
             RemoveComponent<ClickActionComponent>();
             RemoveComponent<ClickOnCard>();
+            RemoveComponent<RotatedCardComponent>();
         }
         private void RemoveComponent<T>() where T : struct
         {

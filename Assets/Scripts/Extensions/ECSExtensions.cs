@@ -17,6 +17,19 @@ namespace Extensions
             component = default;
             return false;
         }
+        
+        public static ref T TakeComponent<T>(this IEcsSystems systems) where T: struct
+        {
+            var world = systems.GetWorld();
+            var filter = world.Filter<T>().End();
+            var pool = world.GetPool<T>();
+            foreach (var entity in filter)
+            {
+                return ref pool.Get(entity);
+            }
+
+            return ref pool.Add(world.NewEntity());
+        }
 
     }
 }

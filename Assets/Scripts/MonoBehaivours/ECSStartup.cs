@@ -30,6 +30,7 @@ public class ECSStartup : MonoBehaviour
         _systems
             .Add (new NewGameSystem())
             .Add (new RotateCardSystem()) 
+            .Add (new RotatedCardSystem()) 
             .Add (new RemoveComponentsSystem())
             .Init ();
     }
