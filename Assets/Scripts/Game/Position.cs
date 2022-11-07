@@ -38,7 +38,7 @@
             return fixedPosition;
         }
 
-        public bool IsnotFixed()
+        public bool IsNotFixed()
         {
             return !IsFixed();
         }

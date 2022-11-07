@@ -1,30 +1,16 @@
 ﻿using Ecs.Components;
+using Extensions;
 using Leopotam.EcsLite;
 
 namespace Ecs.Systems
 {
-    public class RemoveComponentsSystem: IEcsInitSystem, IEcsRunSystem
+    public class RemoveComponentsSystem: IEcsRunSystem
     {
-        private EcsWorld world;
-        
-        public void Init(IEcsSystems systems)
-        {
-            world = systems.GetWorld();
-        }
-
         public void Run(IEcsSystems systems)
         {
-            RemoveComponent<ClickActionComponent>();
-            RemoveComponent<ClickOnCard>();
-            RemoveComponent<RotatedCardComponent>();
-        }
-        private void RemoveComponent<T>() where T : struct
-        {
-            var filter = world.Filter<T> ().End ();
-            foreach (int entity in filter)
-            {
-                world.GetPool<T>().Del(entity);
-            }
+            systems.RemoveComponent<ClickActionComponent>();
+            systems.RemoveComponent<ClickOnCard>();
+            systems.RemoveComponent<OpenedCardComponent>();
         }
     }
 }

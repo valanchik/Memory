@@ -1,3 +1,5 @@
+using System;
+using Ecs;
 using Ecs.Components;
 using Extensions;
 using Leopotam.EcsLite;
@@ -8,15 +10,15 @@ namespace ECS.Systems {
     sealed class RotateCardSystem : IEcsRunSystem {        
         public void Run (IEcsSystems systems)
         {
-            if (systems.TryTakeOnComponentFromPool<ClickActionComponent>(out var comp) && comp.Type == EcsOnClickType.Card)
+            if (systems.TryTakeComponentFromPool<ClickActionComponent>(out var clickActionComponent) && clickActionComponent.Type == EcsOnClickType.Card)
             {
-                var card = comp.Target.GetComponent<Card>();
-                if (card!=null && card.CanRotate)
+                var card = clickActionComponent.Target.GetComponent<Card>();
+                
+                if (!card.IsOpen)
                 {
-                    
                     card.Toggle(() =>
                     {
-                        ref var takeComponent = ref  systems.TakeComponent<RotatedCardComponent>();
+                        ref var takeComponent = ref systems.TakeComponent<OpenedCardComponent>();
                         takeComponent.Card = card;
                     });
                 }

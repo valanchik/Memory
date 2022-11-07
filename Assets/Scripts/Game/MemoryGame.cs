@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Extensions;
+using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,11 +17,18 @@ namespace Game
         {
             NewGame(countPairs);
         }
-        public void NewGame(int countPairs)
+        public List<Position> NewGame(int countPairs)
         {
             ResetList(); 
             CreatePairs(countPairs);
             randomizeList();
+            return list;
+        }
+
+        [CanBeNull]
+        public Position GetPositionByindex(int index)
+        {
+            return list.Find((pos => pos.Index == index));
         }
         public bool Open(int index)
         {
@@ -28,17 +36,16 @@ namespace Game
             if (pos != null && pos.IsNotOpen())
             {
                 pos.Open();
-                _lastStates.Add(pos);
-                if (_lastOpenPosition!=null && _lastOpenPosition.Value != pos.Value)
+                if (_lastOpenPosition!=null && _lastOpenPosition.Value == pos.Value)
                 {
-                    _lastOpenPosition.Hide();
-                    _lastStates.Add(_lastOpenPosition);
+                    pos.FixPosition();
+                    _lastOpenPosition.FixPosition();
+                    return true;
+                    
                 }
                 else
                 {
-                    pos.FixPosition();
-                    _lastOpenPosition?.FixPosition();
-                    return true;
+                    _lastOpenPosition.Hide();
                 }
                 _lastOpenPosition = pos;
                 return true;

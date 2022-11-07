@@ -15,6 +15,10 @@ public class Card : MonoBehaviour
    private float duration = 0.1f;
    private RotateMode mode = RotateMode.FastBeyond360;
    private bool isRotation;
+
+   public void Toggle() => Toggle(null);
+   public void Show() => Show(null);
+   public void Hide() => Hide(null);
    public void Toggle(Action  callback)
    {
       if(isRotation) return;
@@ -22,6 +26,7 @@ public class Card : MonoBehaviour
       else Show(callback);
    }
 
+   
    public void Show(Action  callback)
    {
       if (!IsOpen)
@@ -34,7 +39,7 @@ public class Card : MonoBehaviour
             {
                IsOpen = true;
                isRotation = false;
-               callback();
+               callback?.Invoke();
             });
          });
       }
@@ -51,7 +56,8 @@ public class Card : MonoBehaviour
             {
                IsOpen = false;
                isRotation = false;
-               callback();
+               CanRotate = true;
+               callback?.Invoke();
             });;
            
          });

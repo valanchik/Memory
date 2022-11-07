@@ -1,5 +1,6 @@
 using Ecs.Components;
 using Extensions;
+using Game;
 using Leopotam.EcsLite;
 using MonoBehaivours;
 
@@ -8,13 +9,18 @@ namespace Ecs.Systems {
     {
         public void Run(IEcsSystems systems)
         {
-            if (systems.TryTakeOnComponentFromPool<ClickActionComponent>(out var comp) && comp.Type == EcsOnClickType.newGame)
+            if (systems.TryTakeComponentFromPool<ClickActionComponent>(out var comp) && comp.Type == EcsOnClickType.newGame)
             {
+                systems.RemoveComponent<LastOpenCardComponent>();
                 var shared = systems.GetShared<SharedData>();
-                shared.Game.NewGame(12);
-                shared.GridCards.AddOneCard();
+                var gridCards = shared.GridCards;
+                gridCards.Clear();
+                var list = shared.Game.NewGame(6);
+                foreach (Position position in list)
+                {
+                    gridCards.AddOneCard(position.Index, position.Value);    
+                }
             }
-            
         }
     }
 }

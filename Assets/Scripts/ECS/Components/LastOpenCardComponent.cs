@@ -1,6 +1,6 @@
 ﻿namespace Ecs.Components
 {
-    public struct RotatedCardComponent
+    public struct LastOpenCardComponent
     {
         public Card Card;
     }

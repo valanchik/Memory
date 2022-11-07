@@ -4,7 +4,7 @@ namespace Extensions
 {
     public static class ECSExtensions
     {
-        public static bool TryTakeOnComponentFromPool<T>(this IEcsSystems systems, out T component) where T: struct
+        public static bool TryTakeComponentFromPool<T>(this IEcsSystems systems, out   T component) where T: struct
         {
             var world = systems.GetWorld();
             var filter = world.Filter<T>().End();
@@ -30,6 +30,15 @@ namespace Extensions
 
             return ref pool.Add(world.NewEntity());
         }
-
+        
+        public static void RemoveComponent<T>(this IEcsSystems systems) where T : struct
+        {
+            var world = systems.GetWorld();
+            var filter = world.Filter<T> ().End ();
+            foreach (int entity in filter)
+            {
+                world.GetPool<T>().Del(entity);
+            }
+        }
     }
 }

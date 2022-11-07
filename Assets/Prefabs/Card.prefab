@@ -154,6 +154,7 @@ MonoBehaviour:
   Front: {fileID: 0}
   Back: {fileID: 0}
   IsOpen: 0
+  CanRotate: 1
 --- !u!222 &859441498185358459
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -226,7 +227,7 @@ GameObject:
   - component: {fileID: 8080489051241514626}
   m_Layer: 0
   m_Name: Card
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -278,6 +279,7 @@ MonoBehaviour:
   Front: {fileID: 1665887963731463867}
   Back: {fileID: 5878103641220215741}
   IsOpen: 0
+  CanRotate: 1
 --- !u!114 &8080489051241514626
 MonoBehaviour:
   m_ObjectHideFlags: 0
