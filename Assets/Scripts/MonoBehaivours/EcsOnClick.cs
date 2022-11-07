@@ -1,5 +1,7 @@
+using Ecs;
 using Ecs.Components;
 using Leopotam.EcsLite;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,7 +9,7 @@ namespace MonoBehaivours
 {
     public enum EcsOnClickType
     {
-        newGame,
+        NewGame,
         Card
     }
     public class EcsOnClick : MonoBehaviour, IPointerClickHandler
@@ -15,13 +17,18 @@ namespace MonoBehaivours
         [SerializeField]
         private EcsOnClickType Type;
         private EcsWorld world;
+        private IEcsSystems systems;
+        private EntityTypeStorage entityTypeStorage;
         void Start()
         {
-            world = FindObjectOfType<ECSStartup>()._systems.GetWorld();
+            systems = FindObjectOfType<ECSStartup>()._systems; 
+            world = systems.GetWorld();
+            entityTypeStorage = systems.GetShared<ECSSharedData>().EntityTypeStorage;
         }
         void IPointerClickHandler.OnPointerClick (PointerEventData eventData)
         {
-            int entity = world.NewEntity ();
+         
+            int entity = entityTypeStorage.GetEntityByType(EntityType.Common);
             var pool = world.GetPool<ClickActionComponent>();
             pool.Add(entity);
             ref var component = ref pool.Get(entity);

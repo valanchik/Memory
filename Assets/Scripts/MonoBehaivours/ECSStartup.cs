@@ -16,10 +16,12 @@ public class ECSStartup : MonoBehaviour
 #endif
     void Awake ()
     {
-        var sharedData = new SharedData();
+        var world = new EcsWorld();
+        var sharedData = new ECSSharedData();
         sharedData.Game = new MemoryGame(5);
         sharedData.GridCards = gridCards;
-        _systems = new EcsSystems (new EcsWorld (), sharedData);
+        _systems = new EcsSystems (world, sharedData);
+        
 #if UNITY_EDITOR
         // Создаем отдельную группу для отладочных систем.
         _editorSystems = new EcsSystems (_systems.GetWorld ());
@@ -28,11 +30,13 @@ public class ECSStartup : MonoBehaviour
             .Init ();
 #endif
         _systems
+            .Add (new InitEntityTypeStorage())
             .Add (new NewGameSystem())
             .Add (new RotateCardSystem()) 
             .Add (new CheckOpenedCardSystem()) 
             .Add (new RemoveComponentsSystem())
             .Init ();
+        
     }
     
     void Update () {

@@ -9,10 +9,9 @@ namespace Ecs.Systems {
     {
         public void Run(IEcsSystems systems)
         {
-            if (systems.TryTakeComponentFromPool<ClickActionComponent>(out var comp) && comp.Type == EcsOnClickType.newGame)
+            if (systems.TryTakeComponentFromPool<ClickActionComponent>(out var comp) && comp.Type == EcsOnClickType.NewGame)
             {
-                systems.RemoveComponent<LastOpenCardComponent>();
-                var shared = systems.GetShared<SharedData>();
+                var shared = systems.GetShared<ECSSharedData>();
                 var gridCards = shared.GridCards;
                 gridCards.Clear();
                 var list = shared.Game.NewGame(6);
