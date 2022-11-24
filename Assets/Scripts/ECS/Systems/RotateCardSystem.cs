@@ -16,9 +16,9 @@ namespace ECS.Systems {
                 
                 if (!card.IsOpen)
                 {
-                    card.Toggle(() =>
+                    card.Show(() =>
                     {
-                        ref var takeComponent = ref systems.TakeComponent<OpenedCardComponent>(EntityType.Common);
+                        ref var takeComponent = ref systems.TakeComponent<OpenedCardComponent>(EntityGroup.Common);
                         takeComponent.Card = card;
                     });
                 }

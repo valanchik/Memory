@@ -22,7 +22,7 @@ namespace Extensions
             return false;
         }
         
-        public static ref T TakeComponent<T>(this IEcsSystems systems, EntityType entityType) where T: struct
+        public static ref T TakeComponent<T>(this IEcsSystems systems, EntityGroup entityGroup) where T: struct
         {
             var world = systems.GetWorld();
             var filter = world.Filter<T>().End();
@@ -32,12 +32,12 @@ namespace Extensions
                 return ref pool.Get(entity);
             }
 
-            return ref pool.Add(systems.GetEntityByType(entityType));
+            return ref pool.Add(systems.GetEntityByType(entityGroup));
         }
         
-        public static int GetEntityByType(this IEcsSystems systems, EntityType entityType)
+        public static int GetEntityByType(this IEcsSystems systems, EntityGroup entityGroup)
         {
-            return systems.GetShared<ECSSharedData>().EntityTypeStorage.GetEntityByType(entityType);
+            return systems.GetShared<ECSSharedData>().EntityTypeStorage.GetEntityByType(entityGroup);
         }
         
         public static void RemoveComponent<T>(this IEcsSystems systems) where T : struct

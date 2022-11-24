@@ -12,10 +12,10 @@ namespace ECS.Systems
         {
             var sharedData = systems.GetShared<ECSSharedData>();
             sharedData.EntityTypeStorage = new EntityTypeStorage();
-            var pool = systems.GetWorld().GetPool<LastOpenCardComponent>();
             var ent = systems.GetWorld().NewEntity();
-            pool.Add(ent);
-            sharedData.EntityTypeStorage.CreateType(EntityType.Common, ent);
+            systems.GetWorld().GetPool<GameComponent>().Add(ent);
+            systems.GetWorld().GetPool<LastOpenCardComponent>().Add(ent);
+            sharedData.EntityTypeStorage.CreateType(EntityGroup.Common, ent);
         }
     }
 }

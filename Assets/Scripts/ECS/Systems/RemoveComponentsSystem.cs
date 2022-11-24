@@ -11,6 +11,7 @@ namespace Ecs.Systems
             systems.RemoveComponent<ClickActionComponent>();
             systems.RemoveComponent<ClickOnCard>();
             systems.RemoveComponent<OpenedCardComponent>();
+            systems.RemoveComponent<EndGameComponent>();
         }
     }
 }

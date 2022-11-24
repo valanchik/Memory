@@ -14,8 +14,12 @@ namespace Ecs.Systems {
                 var shared = systems.GetShared<ECSSharedData>();
                 var gridCards = shared.GridCards;
                 gridCards.Clear();
-                var list = shared.Game.NewGame(6);
-                foreach (Position position in list)
+                var pairs = 6;
+                var list = shared.Game.NewGame(pairs);
+                ref var gameComponent = ref systems.TakeComponent<GameComponent>(EntityGroup.Common);
+                gameComponent.Pairs = shared.Game.Pairs;
+                gameComponent.OpenedPairs = 0;
+                foreach (var position in list)
                 {
                     gridCards.AddOneCard(position.Index, position.Value);    
                 }

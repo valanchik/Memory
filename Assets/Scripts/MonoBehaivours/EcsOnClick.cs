@@ -28,7 +28,7 @@ namespace MonoBehaivours
         void IPointerClickHandler.OnPointerClick (PointerEventData eventData)
         {
          
-            int entity = entityTypeStorage.GetEntityByType(EntityType.Common);
+            int entity = entityTypeStorage.GetEntityByType(EntityGroup.Common);
             var pool = world.GetPool<ClickActionComponent>();
             pool.Add(entity);
             ref var component = ref pool.Get(entity);

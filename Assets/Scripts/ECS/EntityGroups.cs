@@ -2,24 +2,24 @@
 
 namespace Ecs
 {
-   public enum EntityType
+   public enum EntityGroup
     {
         Common
     }
     public class EntityTypeStorage
     {
-        private Dictionary<EntityType, int> types = new Dictionary<EntityType, int>();
+        private Dictionary<EntityGroup, int> types = new Dictionary<EntityGroup, int>();
 
-        public void CreateType(EntityType type, int entity)
+        public void CreateType(EntityGroup group, int entity)
         {
-            types.Add(type, entity);
+            types.Add(group, entity);
         }
 
-        public int GetEntityByType(EntityType type)
+        public int GetEntityByType(EntityGroup group)
         {
-            if (types.ContainsKey(type))
+            if (types.ContainsKey(group))
             {
-                return types[type];
+                return types[group];
             }
 
             return -1;

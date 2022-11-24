@@ -21,7 +21,6 @@ public class ECSStartup : MonoBehaviour
         sharedData.Game = new MemoryGame(5);
         sharedData.GridCards = gridCards;
         _systems = new EcsSystems (world, sharedData);
-        
 #if UNITY_EDITOR
         // Создаем отдельную группу для отладочных систем.
         _editorSystems = new EcsSystems (_systems.GetWorld ());
@@ -34,6 +33,7 @@ public class ECSStartup : MonoBehaviour
             .Add (new NewGameSystem())
             .Add (new RotateCardSystem()) 
             .Add (new CheckOpenedCardSystem()) 
+            .Add (new CheckEndGameSystem()) 
             .Add (new RemoveComponentsSystem())
             .Init ();
         

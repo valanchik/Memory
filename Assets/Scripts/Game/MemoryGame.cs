@@ -10,71 +10,35 @@ namespace Game
 {
     public class MemoryGame
     {
-        private readonly List<Position> list = new List<Position>();
-        private Position _lastOpenPosition = null;
-        private readonly List<Position> _lastStates = new List<Position>();
+        private readonly List<Position> list = new();
+        private int pairs;
+        public int Pairs { get => pairs; }
+        
         public MemoryGame(int countPairs)
         {
             NewGame(countPairs);
         }
         public List<Position> NewGame(int countPairs)
         {
+            pairs = countPairs;
             ResetList(); 
-            CreatePairs(countPairs);
-            randomizeList();
+            CreatePairs();
+            RandomizeList();
             return list;
-        }
-
-        [CanBeNull]
-        public Position GetPositionByindex(int index)
-        {
-            return list.Find((pos => pos.Index == index));
-        }
-        public bool Open(int index)
-        {
-            var pos = list.Find(p => p.Index == index);
-            if (pos != null && pos.IsNotOpen())
-            {
-                pos.Open();
-                if (_lastOpenPosition!=null && _lastOpenPosition.Value == pos.Value)
-                {
-                    pos.FixPosition();
-                    _lastOpenPosition.FixPosition();
-                    return true;
-                    
-                }
-                else
-                {
-                    _lastOpenPosition.Hide();
-                }
-                _lastOpenPosition = pos;
-                return true;
-            }
-            return false;
-        }
-        public List<Position> GetNewState()
-        {
-            var l = new List<Position>();
-            foreach (var position in _lastStates)
-            {
-                l.Add(position);
-            }
-            _lastStates.Clear();
-            return l;
         }
         private void ResetList()
         {
             list.Clear();
         }
-        private void CreatePairs(int countPairs)
+        private void CreatePairs()
         {
-            for (var i = 0; i < countPairs; i++)
+            for (var i = 0; i < pairs; i++)
             {
                 list.Add(new Position(i, i, false));
                 list.Add(new Position(i+1, i, false));
             }    
         }
-        private void randomizeList()
+        private void RandomizeList()
         {
             list.Shuffle();
         }
