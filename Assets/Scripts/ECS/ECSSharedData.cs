@@ -1,4 +1,5 @@
 ﻿using Game;
+using MonoBehaivours;
 using UnityEngine;
 
 namespace Ecs
@@ -7,6 +8,9 @@ namespace Ecs
     {
         public MemoryGame Game;
         public GridCards GridCards;
+        public GameObject ModalCanvas;
+        public GameManager GameManager;
         public EntityTypeStorage EntityTypeStorage;
+        public InfoPanel InfoPanel;
     }
 }

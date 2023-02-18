@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Ecs;
@@ -5,11 +6,15 @@ using Ecs.Systems;
 using ECS.Systems;
 using Game;
 using Leopotam.EcsLite;
+using MonoBehaivours;
 using UnityEngine;
 
 public class ECSStartup : MonoBehaviour
 {
-    [SerializeField] private GridCards gridCards;
+    [SerializeField] private GridCards  gridCards;
+    [SerializeField] private GameObject modalCanvas;
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private InfoPanel infoPanel;
     public IEcsSystems _systems;
 #if UNITY_EDITOR
     IEcsSystems _editorSystems;
@@ -20,6 +25,9 @@ public class ECSStartup : MonoBehaviour
         var sharedData = new ECSSharedData();
         sharedData.Game = new MemoryGame(5);
         sharedData.GridCards = gridCards;
+        sharedData.ModalCanvas = modalCanvas;
+        sharedData.GameManager = gameManager;
+        sharedData.InfoPanel = infoPanel;
         _systems = new EcsSystems (world, sharedData);
 #if UNITY_EDITOR
         // Создаем отдельную группу для отладочных систем.
@@ -31,6 +39,8 @@ public class ECSStartup : MonoBehaviour
         _systems
             .Add (new InitEntityTypeStorage())
             .Add (new NewGameSystem())
+            .Add (new TimerSystem())
+            .Add (new CalculationPointSystem())
             .Add (new RotateCardSystem()) 
             .Add (new CheckOpenedCardSystem()) 
             .Add (new CheckEndGameSystem()) 
@@ -38,7 +48,12 @@ public class ECSStartup : MonoBehaviour
             .Init ();
         
     }
-    
+
+    public void Start()
+    {
+        
+    }
+
     void Update () {
         _systems?.Run ();
 #if UNITY_EDITOR

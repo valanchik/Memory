@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Ecs;
@@ -47,6 +48,16 @@ namespace Extensions
             foreach (int entity in filter)
             {
                 world.GetPool<T>().Del(entity);
+            }
+        }
+        public static void TakeComponents<T>(this IEcsSystems systems, Action<T> callback) where T : struct
+        {
+            var world = systems.GetWorld();
+            var filter = world.Filter<T>().End();
+            foreach (var entity in filter)
+            {
+                ref var comp = ref systems.TakeComponent<T>(EntityGroup.Common);
+                callback?.Invoke(comp);
             }
         }
     }

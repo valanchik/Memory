@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
@@ -63,6 +64,21 @@ public class Card : MonoBehaviour
          });
       }
    }
+
+   public Vector2 GetImageSizePerPixel()
+   {
+      var image = Front.GetComponent<Image>();
+      Sprite sprite = image.sprite;
+      
+      int textureWidth = sprite.texture.width;
+      int textureHeight = sprite.texture.height;
+      
+      Rect spriteRect = sprite.rect;
+      
+      int spriteWidth = (int)(textureWidth * spriteRect.width / sprite.textureRect.width);
+      int spriteHeight = (int)(textureHeight * spriteRect.height / sprite.textureRect.height);
+      return new Vector2(spriteWidth, spriteHeight);
+   } 
 
    private void SetActiveFrontSide(bool status)
    {
