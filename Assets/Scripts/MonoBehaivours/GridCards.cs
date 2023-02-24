@@ -10,6 +10,7 @@ public class GridCards:MonoBehaviour
     public GameObject prefabCard;
     private Sprite[] sprites;
     private GridLayoutGroup gridLayoutGroup;
+    private List<Card> cardsList = new List<Card>();
 
 
     public void Start()
@@ -26,6 +27,12 @@ public class GridCards:MonoBehaviour
         card.Value = value;
         var img = GetImageByValue(card.Value);
         card.Front.GetComponent<Image>().sprite = img;
+        cardsList.Add(card);
+    }
+
+    public List<Card> GetCardList()
+    {
+        return cardsList;
     }
 
     private Sprite GetImageByValue(int value)
@@ -40,6 +47,7 @@ public class GridCards:MonoBehaviour
         {
             Destroy(card);
         }
+        cardsList.Clear();
     }
 
     public void SetColumnCount(int count)
@@ -56,8 +64,7 @@ public class GridCards:MonoBehaviour
         int colCount = gridLayoutGroup.constraintCount;
         int rowCount = Mathf.CeilToInt((float) childCount / colCount);
         
-        RectTransform gridTransform = GetComponent<RectTransform>();
-        var rect = gridTransform.rect;
+        var rect = GetComponent<RectTransform>().rect;
         
         float newWidth = rect.width - (gridLayoutGroup.spacing.x * (colCount - 1)) - gridLayoutGroup.padding.left - gridLayoutGroup.padding.right;
         float newHeight = rect.width - (gridLayoutGroup.spacing.y * (rowCount - 1)) - gridLayoutGroup.padding.top - gridLayoutGroup.padding.bottom;
@@ -70,5 +77,28 @@ public class GridCards:MonoBehaviour
         
         gridLayoutGroup.cellSize = perCell;
     }
+
+    public int MaxRowsInRect(Card fromCard, int maxCols)
+    {
+        if (gridLayoutGroup.transform.childCount == 0)
+        {
+            return 0;
+        }
+        
+        var rect = GetComponent<RectTransform>().rect;
+        
+        var firstChild = fromCard.GetImageSizePerPixel();
+        float firstChildAspectRatio = firstChild.y / firstChild.x;
+        
+        float gridWidth = rect.width - gridLayoutGroup.padding.left - gridLayoutGroup.padding.right
+                          - (gridLayoutGroup.spacing.x * (gridLayoutGroup.constraintCount - 1));
+        
+        float gridHeight = rect.height - gridLayoutGroup.padding.top - gridLayoutGroup.padding.bottom;
+        float cellHeight = gridWidth / maxCols * firstChildAspectRatio;
+        int maxRows = Mathf.FloorToInt(gridHeight / (cellHeight + gridLayoutGroup.spacing.y));
+
+        return maxRows;
+    }
+
     
 }

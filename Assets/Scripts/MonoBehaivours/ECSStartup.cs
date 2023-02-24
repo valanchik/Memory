@@ -28,6 +28,7 @@ public class ECSStartup : MonoBehaviour
         sharedData.ModalCanvas = modalCanvas;
         sharedData.GameManager = gameManager;
         sharedData.InfoPanel = infoPanel;
+        sharedData.Storage = new GameStorage();
         _systems = new EcsSystems (world, sharedData);
 #if UNITY_EDITOR
         // Создаем отдельную группу для отладочных систем.

@@ -12,5 +12,8 @@ namespace Ecs
         public GameManager GameManager;
         public EntityTypeStorage EntityTypeStorage;
         public InfoPanel InfoPanel;
+        public IGameStorage Storage;
     }
+
+    
 }

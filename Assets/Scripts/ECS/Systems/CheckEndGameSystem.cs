@@ -18,12 +18,16 @@ namespace ECS.Systems {
             ref var gameComponent = ref systems.TakeComponent<GameComponent>(EntityGroup.Common);
             gameComponent.Started = false;
             systems.GetShared<ECSSharedData>().ModalCanvas.SetActive(true);
-            CalculateGamePoints(systems, ref gameComponent);
+            CheckRecordPointsAndSave(systems, ref gameComponent);
         }
 
-        public void CalculateGamePoints(IEcsSystems systems, ref GameComponent gameComponent)
+        public void CheckRecordPointsAndSave(IEcsSystems systems, ref GameComponent gameComponent)
         {
-            
+            var storege = systems.GetShared<ECSSharedData>().Storage;
+            if (storege.GetPoins()<=gameComponent.RecordPoints)
+            {
+                storege.SavePoints(gameComponent.RecordPoints);
+            }
         }
     }
 }

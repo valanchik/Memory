@@ -1612,8 +1612,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d523ca3196c204f9e227b8cb75a371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardColumnCount: 4
-  CardRowCount: 5
+  CardColumnCount: 2
+  CardRowCount: 0
 --- !u!4 &1568209652
 Transform:
   m_ObjectHideFlags: 0
@@ -1905,10 +1905,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 5
-    m_Right: 5
-    m_Top: 5
-    m_Bottom: 5
+    m_Left: 10
+    m_Right: 10
+    m_Top: 10
+    m_Bottom: 10
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
