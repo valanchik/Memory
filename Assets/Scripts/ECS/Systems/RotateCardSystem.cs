@@ -20,6 +20,7 @@ namespace ECS.Systems {
                     {
                         ref var takeComponent = ref systems.TakeComponent<OpenedCardComponent>(EntityGroup.Common);
                         takeComponent.Card = card;
+                        systems.IncrementSteps();
                     });
                 }
             }

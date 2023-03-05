@@ -26,7 +26,6 @@ namespace ECS.Systems {
             var infoPanel = systems.GetShared<ECSSharedData>().InfoPanel;
             infoPanel.SetTime(gameComponent.DeltaTime);
             infoPanel.SetSteps(gameComponent.Steps);
-            infoPanel.SetPoints(gameComponent.RecordPoints);
         }
     }
 }

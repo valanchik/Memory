@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Ecs;
+using Ecs.Components;
 using Leopotam.EcsLite;
 
 namespace Extensions
@@ -59,6 +60,12 @@ namespace Extensions
                 ref var comp = ref systems.TakeComponent<T>(EntityGroup.Common);
                 callback?.Invoke(comp);
             }
+        }
+
+        public static void IncrementSteps(this IEcsSystems systems)
+        {
+            ref var gameComponent = ref systems.TakeComponent<GameComponent>(EntityGroup.Common);
+            gameComponent.Steps++;
         }
     }
 }

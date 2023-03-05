@@ -27,21 +27,16 @@ namespace Ecs.Systems {
             gridCards.Clear();
             var gm = systems.GetShared<ECSSharedData>().GameManager;
             var pairs = 0;
-            if (gm.CardRowCount>0)
+            var colCount = gm.GetCurrentComplication();
+           
+            var maxRows = GetMaxRows(shared, colCount);
+            if (maxRows*colCount % 2 !=0 && maxRows>1)
             {
-                pairs = (int)(gm.CardColumnCount*gm.CardRowCount)/2;
+                maxRows--;
             }
-            else
-            {
-                var maxRows = GetMaxRows(shared, gm.CardColumnCount);
-                if (maxRows*gm.CardColumnCount % 2 !=0 && maxRows>1)
-                {
-                    maxRows--;
-                }
-                pairs = (int)(gm.CardColumnCount*maxRows)/2;
-            }
+            pairs = (int)(colCount*maxRows)/2;
             
-            gridCards.SetColumnCount(gm.CardColumnCount);
+            gridCards.SetColumnCount(colCount);
             var list = shared.Game.NewGame(pairs);
             ref var gameComponent = ref systems.TakeComponent<GameComponent>(EntityGroup.Common);
             gameComponent.Pairs = shared.Game.Pairs;

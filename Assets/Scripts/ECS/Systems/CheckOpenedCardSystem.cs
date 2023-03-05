@@ -33,7 +33,6 @@ namespace ECS.Systems {
                 }
                 else if (lastOpenedCard.CanRotate) {
                     lastOpenedCard.Hide();
-                    IncrementSteps(systems);
                 }
                 lastOpenCardComponent.Card = openedCard;
             }
@@ -43,12 +42,6 @@ namespace ECS.Systems {
             }
         }
     }
-
-    public void IncrementSteps(IEcsSystems systems)
-    {
-        ref var gameComponent = ref systems.TakeComponent<GameComponent>(EntityGroup.Common);
-        gameComponent.Steps++;
     }
-}
 
 }
