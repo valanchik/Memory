@@ -15,5 +15,19 @@ namespace Extensions
                 (list[k], list[n]) = (list[n], list[k]);
             }  
         }
+
+        public static bool ReplaceAt<T>(this List<T> list, T source, T target) where T: IEquatable<T>
+        {
+            int index = list.FindIndex(x => x.Equals(source));
+
+            if (index >= 0)
+            {
+                list.RemoveAt(index);
+                list.Insert(index, target);
+                return true;
+            }
+
+            return false;
+        }
     }
 }

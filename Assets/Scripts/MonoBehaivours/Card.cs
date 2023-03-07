@@ -59,8 +59,7 @@ public class Card : MonoBehaviour
                isRotation = false;
                CanRotate = true;
                callback?.Invoke();
-            });;
-           
+            });
          });
       }
    }

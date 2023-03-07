@@ -29,9 +29,9 @@ public class ECSStartup : MonoBehaviour
         sharedData.GameManager = gameManager;
         sharedData.InfoPanel = infoPanel;
         sharedData.Storage = new GameStorage();
+        //sharedData.Storage.Reset();
         _systems = new EcsSystems (world, sharedData);
 #if UNITY_EDITOR
-        // Создаем отдельную группу для отладочных систем.
         _editorSystems = new EcsSystems (_systems.GetWorld ());
         _editorSystems
             .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())

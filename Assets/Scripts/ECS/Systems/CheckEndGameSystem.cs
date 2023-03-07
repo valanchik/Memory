@@ -1,6 +1,7 @@
 using Ecs;
 using Ecs.Components;
 using Extensions;
+using Game;
 using Leopotam.EcsLite;
 using UnityEngine;
 
@@ -18,15 +19,21 @@ namespace ECS.Systems {
             ref var gameComponent = ref systems.TakeComponent<GameComponent>(EntityGroup.Common);
             gameComponent.Started = false;
             systems.GetShared<ECSSharedData>().ModalCanvas.SetActive(true);
-            CheckRecordPointsAndSave(systems, ref gameComponent);
+            SaveRecod(systems, ref gameComponent);
         }
 
-        public void CheckRecordPointsAndSave(IEcsSystems systems, ref GameComponent gameComponent)
+        public void SaveRecod(IEcsSystems systems, ref GameComponent gameComponent)
         {
             var storege = systems.GetShared<ECSSharedData>().Storage;
-            if (storege.GetPoins()<=gameComponent.RecordPoints)
+            var result = new GameResult()
             {
-                storege.SavePoints(gameComponent.RecordPoints);
+                Time = gameComponent.DeltaTime,
+                Steps = gameComponent.Steps,
+                ColumnCount = gameComponent.ColumCount
+            };
+            if (storege.TrySaveGameResult(result))
+            {
+                Debug.Log($"Рекорд: {result}");    
             }
         }
     }

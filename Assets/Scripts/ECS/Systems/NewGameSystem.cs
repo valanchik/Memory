@@ -41,6 +41,7 @@ namespace Ecs.Systems {
             ref var gameComponent = ref systems.TakeComponent<GameComponent>(EntityGroup.Common);
             gameComponent.Pairs = shared.Game.Pairs;
             gameComponent.OpenedPairs = 0;
+            gameComponent.ColumCount = colCount;
             foreach (var position in list)
             {
                 gridCards.AddOneCard(position.Index, position.Value);    
@@ -68,8 +69,6 @@ namespace Ecs.Systems {
             comp.StartTime = DateTime.Now;
             comp.Started = true;
             comp.Steps = 0;
-            comp.BadSteps = 0;
-            comp.RecordPoints = 0;
         }
 
         private void DisableModalWindow(GameObject target)

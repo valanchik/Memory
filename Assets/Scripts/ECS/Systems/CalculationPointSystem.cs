@@ -14,7 +14,7 @@ namespace ECS.Systems {
             {
                 if (gameComponent.Pairs!=0 && gameComponent.Steps!=0)
                 {
-                    gameComponent.RecordPoints = gameComponent.Pairs / gameComponent.Steps;                    
+                                       
                 }
 
                 RenderInfoPanel(systems, ref gameComponent);

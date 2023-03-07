@@ -10,7 +10,6 @@ namespace Ecs.Components
         public DateTime StartTime;
         public TimeSpan DeltaTime;
         public int Steps;
-        public int BadSteps;
-        public int RecordPoints;
+        public int ColumCount;
     }
 }
