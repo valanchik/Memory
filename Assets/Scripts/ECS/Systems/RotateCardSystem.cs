@@ -1,10 +1,8 @@
-using System;
 using Ecs;
 using Ecs.Components;
 using Extensions;
 using Leopotam.EcsLite;
 using MonoBehaivours;
-using UnityEngine;
 
 namespace ECS.Systems {
     sealed class RotateCardSystem : IEcsRunSystem {        

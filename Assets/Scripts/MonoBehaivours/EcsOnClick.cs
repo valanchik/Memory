@@ -1,7 +1,6 @@
 using Ecs;
 using Ecs.Components;
 using Leopotam.EcsLite;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 

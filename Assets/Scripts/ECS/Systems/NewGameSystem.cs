@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using Ecs.Components;
 using Extensions;
-using Game;
 using Leopotam.EcsLite;
 using MonoBehaivours;
 using UnityEngine;

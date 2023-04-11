@@ -1,8 +1,7 @@
-using System;
 using Ecs;
 using Ecs.Components;
-using Leopotam.EcsLite;
 using Extensions;
+using Leopotam.EcsLite;
 
 namespace ECS.Systems {
     sealed class CalculationPointSystem : IEcsRunSystem

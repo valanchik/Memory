@@ -1,6 +1,7 @@
 using System;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+
 namespace MonoBehaivours
 {
     public class InfoPanel : MonoBehaviour

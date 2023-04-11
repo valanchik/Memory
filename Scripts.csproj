@@ -72,6 +72,8 @@
      <Compile Include="Assets\Scripts\ECS\Components\TimerComponent.cs" />
      <Compile Include="Assets\Scripts\ECS\Systems\TimerSystem.cs" />
      <Compile Include="Assets\Scripts\Extensions\ListFuncs.cs" />
+     <Compile Include="Assets\Scripts\Game\IGameStorage.cs" />
+     <Compile Include="Assets\Scripts\Game\GameResult.cs" />
      <None Include="Assets\Scripts\Scripts.asmdef" />
      <Reference Include="UnityEngine">
      <HintPath>C:/Program Files/Unity/Hub/Editor/2021.2.0b13/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

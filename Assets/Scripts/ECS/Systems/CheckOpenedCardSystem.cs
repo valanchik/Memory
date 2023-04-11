@@ -2,8 +2,6 @@ using Ecs;
 using Ecs.Components;
 using Extensions;
 using Leopotam.EcsLite;
-using UnityEditor;
-using UnityEngine;
 
 namespace ECS.Systems {
     sealed class CheckOpenedCardSystem : IEcsRunSystem {        
